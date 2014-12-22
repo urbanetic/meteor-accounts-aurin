@@ -1,5 +1,10 @@
-AURIN_APP_NAME = 'ESP'
-AURIN_SERVER_URL = 'http://115.146.86.33:8080/envisionauth'
+env = process.env
+AURIN_APP_NAME = env.AUTH_AURIN_APP_NAME
+AURIN_SERVER_URL = env.AUTH_AURIN_SERVER_URL
+
+console.log('AURIN Auth:')
+console.log('  AURIN_APP_NAME: ' + AURIN_APP_NAME)
+console.log('  AURIN_SERVER_URL: ' + AURIN_SERVER_URL)
 
 loginHandler = (request) ->
   console.log('loginHandler', arguments)
@@ -16,7 +21,6 @@ loginHandler = (request) ->
       'Content-Type': 'application/json'
   })
   data = result.data
-  console.log('result', result)
 
   # Access denied gives empty content.
   if result.content.trim() == ''
@@ -28,12 +32,14 @@ loginHandler = (request) ->
 
   unless hasAppAccess
     throw new Meteor.Error('Access denied for app: ' + AURIN_APP_NAME + '. Please contact us for ' +
-      'assistance')
+      'assistance.')
 
   # Create the user or add new details.
   selector = {username: username}
+  name = (data.firstname + ' ' + data.lastname).trim()
   Meteor.users.upsert(selector, {$set: {
     username: username,
+    'profile.name': name,
     'services.aurin': data
   }})
   user = Meteor.users.findOne(selector)

@@ -9,6 +9,7 @@ Package.on_use(function(api) {
   api.use(['coffeescript', 'underscore', 'http', 'accounts-password', 'accounts-ui'],
     ['client', 'server']);
   api.use(['templating', 'jquery', 'less'], 'client');
+  api.use(['iron:router'], 'client', {weak: true});
   api.add_files([
     'src/server.coffee'
   ], 'server');
@@ -16,6 +17,10 @@ Package.on_use(function(api) {
     'src/client.coffee',
     'src/aurinLoginForm.html',
     'src/aurinLoginForm.less',
-    'src/aurinLoginForm.coffee'
+    'src/aurinLoginForm.coffee',
+    'src/aurinUserNav.html',
+    'src/aurinUserNav.less',
+    'src/aurinUserNav.coffee'
   ], 'client');
+  api.export('AccountsAurin', 'client');
 });
