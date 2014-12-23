@@ -1,11 +1,14 @@
 Meteor.loginWithAurin = (username, password, callback) ->
+  afterLogin = AccountsAurin._config.afterLogin
   loginRequest = {username: username, password: password, isAurin: true}
   Accounts.callLoginMethod
     methodName: 'aurinLogin'
     methodArguments: [loginRequest]
-    userCallback: callback
+    userCallback: (err, result) ->
+      afterLogin() unless err
+      callback.apply(null, arguments)
 
-AccountsAurin =
+AccountsAurin = _.extend AccountsAurin,
 
   _config: null
 
@@ -14,11 +17,6 @@ AccountsAurin =
       loginRoute: 'login'
       loginTemplate: 'aurinLoginForm'
     }, config)
-    afterLogin = config.afterLogin
-    if afterLogin
-      Tracker.autorun ->
-        user = Meteor.user()
-        afterLogin() if user
     loginRoute = config.loginRoute
     loginTemplate = config.loginTemplate
     if Router

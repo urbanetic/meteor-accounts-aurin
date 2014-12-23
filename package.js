@@ -6,13 +6,12 @@ Package.describe({
 
 Package.on_use(function(api) {
   api.versionsFrom('METEOR@0.9.0');
-  api.use(['coffeescript', 'underscore', 'http', 'accounts-password', 'accounts-ui'],
-    ['client', 'server']);
+  api.use(['coffeescript', 'underscore', 'http', 'accounts-password', 'accounts-ui',
+    'aramk:utility@0.4.2', 'matb33:collection-hooks@0.7.6'], ['client', 'server']);
   api.use(['templating', 'jquery', 'less'], 'client');
   api.use(['iron:router'], 'client', {weak: true});
-  api.add_files([
-    'src/server.coffee'
-  ], 'server');
+  api.add_files(['src/common.coffee'], ['client', 'server']);
+  api.add_files(['src/server.coffee'], 'server');
   api.add_files([
     'src/client.coffee',
     'src/aurinLoginForm.html',
@@ -22,5 +21,5 @@ Package.on_use(function(api) {
     'src/aurinUserNav.less',
     'src/aurinUserNav.coffee'
   ], 'client');
-  api.export('AccountsAurin', 'client');
+  api.export('AccountsAurin', ['client', 'server']);
 });
