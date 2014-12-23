@@ -17,8 +17,10 @@ TemplateClass.events
     console.debug('Logging in with username:', username)
     # Attempt to log in the user using the built-in accounts-password package.
     Meteor.loginWithPassword username, password, (err) ->
-      # If the login failed, login with AURIN.
-      return unless err
+      unless err
+        AccountsAurin.onAfterLogin()
+        return
+      # If the login failed, try with AURIN.
       Meteor.loginWithAurin username, password, (err, result) ->
         if err
           console.error('Error when logging in', err)

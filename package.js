@@ -19,7 +19,8 @@ Package.on_use(function(api) {
     'src/aurinLoginForm.coffee',
     'src/aurinUserNav.html',
     'src/aurinUserNav.less',
-    'src/aurinUserNav.coffee'
+    'src/aurinUserNav.coffee',
+    'src/resources/aurin.jpg'
   ], 'client');
   api.export('AccountsAurin', ['client', 'server']);
 });
