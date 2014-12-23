@@ -7,7 +7,6 @@ console.log('  AURIN_APP_NAME: ' + AURIN_APP_NAME)
 console.log('  AURIN_SERVER_URL: ' + AURIN_SERVER_URL)
 
 loginHandler = (request) ->
-  console.log('loginHandler', arguments)
   return undefined unless request.isAurin
   username = request.username
   password = request.password
@@ -35,11 +34,11 @@ loginHandler = (request) ->
       'assistance.')
 
   # Create the user or add new details.
-  selector = {username: username}
   name = (data.firstname + ' ' + data.lastname).trim()
+  selector = {username: username}
   Meteor.users.upsert(selector, {$set: {
-    username: username,
-    'profile.name': name,
+    username: username
+    'profile.name': name
     'services.aurin': data
   }})
   user = Meteor.users.findOne(selector)

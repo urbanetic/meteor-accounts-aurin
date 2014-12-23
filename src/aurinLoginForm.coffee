@@ -15,12 +15,16 @@ TemplateClass.events
       addMessage(createErrorMessage(err))
       return
     console.debug('Logging in with username:', username)
-    Meteor.loginWithAurin username, password, (err, result) ->
-      if err
-        console.error('Error when logging in', err)
-        addMessage(createErrorMessage(err.error), template)
-      else
-        console.debug('Successfully logged in', result)
+    # Attempt to log in the user using the built-in accounts-password package.
+    Meteor.loginWithPassword username, password, (err) ->
+      # If the login failed, login with AURIN.
+      return unless err
+      Meteor.loginWithAurin username, password, (err, result) ->
+        if err
+          console.error('Error when logging in', err)
+          addMessage(createErrorMessage(err.error), template)
+        else
+          console.debug('Successfully logged in', result)
 
 
 getFormDom = (template) -> getTemplate(template).$('form')
