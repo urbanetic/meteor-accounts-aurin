@@ -10,7 +10,7 @@ Package.on_use(function(api) {
   api.use(['coffeescript', 'underscore', 'http', 'accounts-password', 'accounts-ui',
     'aramk:utility@0.4.2', 'matb33:collection-hooks@0.7.6'], ['client', 'server']);
   api.use(['templating', 'jquery', 'less'], 'client');
-  api.use(['iron:router'], 'client', {weak: true});
+  api.use(['iron:router@1.0.3'], 'client', {weak: true});
   api.add_files(['src/common.coffee'], ['client', 'server']);
   api.add_files(['src/server.coffee'], 'server');
   api.add_files([
