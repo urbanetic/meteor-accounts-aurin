@@ -1,11 +1,14 @@
 TemplateClass = Template.aurinLoginForm
 
+TemplateClass.rendered = ->
+  getUsernameInput(@).focus()
+
 TemplateClass.events
 
   'submit form': (e, template) ->
     e.preventDefault()
     clearMessages()
-    $username = template.$('[name="username"]')
+    $username = getUsernameInput(template)
     $password = template.$('[name="password"]')
     username = $username.val().trim()
     password = $password.val().trim()
@@ -30,13 +33,20 @@ TemplateClass.events
 
 
 getFormDom = (template) -> getTemplate(template).$('form')
+
 clearMessages = (template) ->
   getFormDom(template).removeClass('error')
   getMessagesDom(template).empty()
+
 addMessage = ($message, template) ->
   getMessagesDom(template).prepend($message)
   if $message.hasClass('error')
     getFormDom(template).addClass('error')
+
 getMessagesDom = (template) -> getTemplate(template).$('.messages')
+
+getUsernameInput = (template) -> getTemplate(template).$('[name="username"]')
+
 getTemplate = (template) -> template ? Template.instance()
+
 createErrorMessage = (err) -> $('<div class="ui error message">' + err.toString() + '</div>')
