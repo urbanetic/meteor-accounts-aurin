@@ -12,6 +12,7 @@ TemplateClass.events
     $password = template.$('[name="password"]')
     username = $username.val().trim()
     password = $password.val().trim()
+    $password.val('').focus()
     if username == '' || password == ''
       err = 'Must provide both username and password'
       console.error(err)
