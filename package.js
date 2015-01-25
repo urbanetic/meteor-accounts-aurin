@@ -2,7 +2,7 @@ Package.describe({
   name: 'urbanetic:accounts-aurin',
   summary: 'An accounts provider for AURIN workbench applications.',
   git: 'https://github.com/urbanetic/meteor-accounts-aurin.git',
-  version: '0.1.1'
+  version: '0.1.2'
 });
 
 Package.on_use(function(api) {

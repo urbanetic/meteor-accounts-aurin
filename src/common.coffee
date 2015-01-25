@@ -1,6 +1,8 @@
 AccountsAurin =
 
-  addCollectionAuthorization: (collection) ->
+  addCollectionAuthorization: (collection, options) ->
+    options = _.extend({
+    }, options)
     if Meteor.isServer
       name = Collections.getName(collection)
       # Only publish documents belonging to the logged in user.
@@ -13,7 +15,11 @@ AccountsAurin =
           # Admin can see all docs.
           collection.find()
         else
-          collection.find({author: username})
+          if options.userSelector
+            selector = options.userSelector(userId: userId, user: user, username: username)
+          else
+            selector = {author: username}
+          collection.find(selector)
 
     # Add the logged in user as the author when a doc is created in the collection.
     collection.before.insert (userId, doc) ->
