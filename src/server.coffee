@@ -2,9 +2,9 @@ env = process.env
 AURIN_APP_NAME = env.AURIN_APP_NAME
 AURIN_SERVER_URL = env.AURIN_SERVER_URL
 
-console.log('AURIN Auth:')
-console.log('  AURIN_APP_NAME: ' + AURIN_APP_NAME)
-console.log('  AURIN_SERVER_URL: ' + AURIN_SERVER_URL)
+Logger.info('AURIN Auth:')
+Logger.info('  AURIN_APP_NAME: ' + AURIN_APP_NAME)
+Logger.info('  AURIN_SERVER_URL: ' + AURIN_SERVER_URL)
 
 loginHandler = (request) ->
   return undefined unless request.isAurin
