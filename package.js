@@ -2,7 +2,7 @@ Package.describe({
   name: 'urbanetic:accounts-aurin',
   summary: 'An accounts provider for AURIN workbench applications.',
   git: 'https://github.com/urbanetic/meteor-accounts-aurin.git',
-  version: '0.2.3'
+  version: '0.2.4'
 });
 
 Package.on_use(function(api) {
@@ -13,7 +13,7 @@ Package.on_use(function(api) {
     'http',
     'accounts-password',
     'accounts-ui',
-    'urbanetic:accounts-ui@0.2.1',
+    'urbanetic:accounts-ui@0.2.2',
     'aramk:utility@0.8.2',
     'matb33:collection-hooks@0.7.6'
   ], ['client', 'server']);
