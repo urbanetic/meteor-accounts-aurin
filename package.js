@@ -29,5 +29,4 @@ Package.on_use(function(api) {
     'src/resources/aurin.jpg'
   ], 'client');
   api.imply('urbanetic:accounts-ui');
-  api.export('AccountsAurin', ['client', 'server']);
 });

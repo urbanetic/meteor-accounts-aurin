@@ -16,7 +16,6 @@ TemplateClass.login = (username, password, template) ->
   Meteor.loginWithPassword username, password, (err) ->
     unless err
       Logger.info('Successfully logged in', username)
-      AccountsAurin.onAfterLogin()
       df.resolve()
       return
     Logger.info('Contacting AURIN Auth')

@@ -1,1 +1,5 @@
-AccountsAurin = _.extend({}, AccountsUi)
+Meteor.startup ->
+
+  AccountsUi.config
+    login:
+      template: 'aurinLoginForm'
